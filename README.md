@@ -1,2 +1,2 @@
-# V2343-sandbox
+# MLOPS-sandbox
 A proposal for the sandbox environment
