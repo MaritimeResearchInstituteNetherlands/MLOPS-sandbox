@@ -11,6 +11,17 @@ The sandbox github contains everythiong to develop and work with the MLOPS-sandb
 - Python and pip
 - docker and docker-compose need to be installed
 
+The folder <code>docker</code> contains several docker images that are to be created:
+- <code>mlflow</code> contains the mlflow tracking server,
+- <code>postgres</postgres> contains the database mlflow uses to store artifacts.
+
+As a developer you can build, up, down using <code>docker-compose</code>. The config is read from <code>.env</code> by docker-compose only.
+
+# Available tools
+- With a local installation, the mlflow user interface should be available at <code>http://localhost:5000</code>
+
+
+
 
 
 
