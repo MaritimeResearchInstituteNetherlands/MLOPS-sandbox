@@ -1,0 +1,5 @@
+pandas-datareader
+importlib_metadata
+xgboost
+tensorflow
+hyperopt
