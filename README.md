@@ -16,6 +16,8 @@ The folder <code>docker</code> contains several docker images that are to be cre
 - <code>postgres</code> contains the database image construction that mlflow uses to store artifacts.
 - <code>jupyter</code> contains the jupyter notebook image construction code.
 - <code>python-dev</code> contains the python image construction code.
+- <code>opa</code> contains the open policy agent image construction code.
+
 
 In order to control the infra toolset, <code>make</code> is used:
 - <code>make all</code> cleans, builds and ups
@@ -24,9 +26,18 @@ In order to control the infra toolset, <code>make</code> is used:
 # Available tools
 - With a local installation, the mlflow user interface should be available at <code>http://localhost:5000</code>
 - With a local installation, the Jupyter notebook UI should be available at <code>http://localhost:8888/lab</code> using the link provided during the build process (the standard way Jupyter does this)
+- With a local installation, the opa should be available at <code>http://localhost:8181</code>
+
+# Opa note:
+- run <code>curl -X PUT --data-binary @access_policy.rego http://localhost:8181/v1/policies/main</code> to give the OPA service the rule you defined - it will return {} (empty object) if there are no errors
+- run <code>curl http://localhost:8181/v1/policies</code> to confirm that your policy (rego) is within the list of policies that OPA now has
+- run <code>curl -X POST --data-binary @input.json 'http://localhost:8181/v1/data/example/allow_access' -H 'Content-Type: application/json'</code> to have OPA scan the contents of the input.json file to make sure it complies with the policies you've defined - should see a response like {"result":false/true}
+An example policy and example input can be found in ./docker/opa
 
 # Notice
-This setup originated from <code>https://github.com/amoat7/mlflow_tutorial</code>, but was heavily modified. Rights etc.. need to be checked (it is AGPL-3.0 licensed)
+This setup originated from <code>https://github.com/amoat7/mlflow_tutorial</code> and from <code>https://github.com/vastevenson/opa-rego-json-intro-example-vs</code> but was heavily modified. Rights etc.. need to be checked (it is AGPL-3.0 licensed)
+
+
 
 
 

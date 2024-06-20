@@ -64,6 +64,13 @@ services:
       - "5433:5432"
     volumes:
       - db_volume_1:/var/lib/postgresql/data
+  opa:
+    build:
+      context: ./docker/opa
+    image: ${IMAGE_OWNER}/${REPO_SLUG}/${OPA_IMAGE_NAME}:${VERSION}
+    restart: always
+    ports:
+      - "8181:8181"
 
 volumes:
   db_volume_1:
