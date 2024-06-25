@@ -81,6 +81,8 @@ services:
       - ./docker/envoy/envoy.yaml:/config/envoy.yaml
   app:
     image: kennethreitz/httpbin:latest
+    ports:
+      - "80:80"
 
 
 
