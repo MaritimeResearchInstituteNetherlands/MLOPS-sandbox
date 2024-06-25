@@ -1,7 +1,13 @@
-package example
+package envoy.authz
 
-default allow_access = false
+import input.attributes.request.http as http_request
 
-allow_access {
-	input.classification == "NATO UNCLASSIFIED"
+default allow = false
+
+allow = response {
+  http_request.method == "GET"
+  response := {
+      "allowed": true,
+      "headers": {"X-Auth-User": "1234"}
+  }
 }

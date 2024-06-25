@@ -18,6 +18,8 @@ The folder <code>docker</code> contains several docker images that are to be cre
 - <code>python-dev</code> contains the python image construction code.
 - <code>opa</code> contains the open policy agent image construction code.
 
+- **currently trying envoy as L7 proxy/filter**
+
 
 In order to control the infra toolset, <code>make</code> is used:
 - <code>make all</code> cleans, builds and ups
@@ -34,8 +36,13 @@ In order to control the infra toolset, <code>make</code> is used:
 - run <code>curl -X POST --data-binary @input.json 'http://localhost:8181/v1/data/example/allow_access' -H 'Content-Type: application/json'</code> to have OPA scan the contents of the input.json file to make sure it complies with the policies you've defined - should see a response like {"result":false/true}
 An example policy and example input can be found in ./docker/opa
 
+# Envoy note:
+- curl -X GET http://localhost:8080/anything should work but curl -X POST http://localhost:8080/anything should fail.
+
+Environment variables SERVICE_NAME and SERVICE_PORT refers to the service Envoy is proxying. These env variables will replace the variables in envoy.yaml. See ./compose/envoy/entrypoint.sh for more details.
+
 # Notice
-This setup originated from <code>https://github.com/amoat7/mlflow_tutorial</code> and from <code>https://github.com/vastevenson/opa-rego-json-intro-example-vs</code> but was heavily modified. Rights etc.. need to be checked (it is AGPL-3.0 licensed)
+This setup originated from <code>https://github.com/amoat7/mlflow_tutorial</code> and from <code>https://github.com/vastevenson/opa-rego-json-intro-example-vs</code> and from <code>https://medium.com/swlh/securing-dockerized-microservices-with-open-policy-agent-and-envoy-c128dfc764fe</code>but was heavily modified. Rights etc.. need to be checked (it is AGPL-3.0 licensed)
 
 
 
