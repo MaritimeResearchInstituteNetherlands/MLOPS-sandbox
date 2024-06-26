@@ -1,4 +1,6 @@
 FROM envoyproxy/envoy:v1.17.1
 
-COPY envoy.yaml /config/envoy.yaml
-RUN chmod go+r /config/envoy.yaml
+COPY entrypoint.sh /
+RUN chmod 500 /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
